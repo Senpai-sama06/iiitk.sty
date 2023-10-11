@@ -1,0 +1,142 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{iiitk}
+  [2011/01/11 v0.01 LaTeX package for my own purpose]
+
+
+\DeclareOption{sans}{
+  \renewcommand{\familydefault}{\sfdefault}
+}
+
+%% 'roman' option
+\DeclareOption{roman}{
+  \renewcommand{\familydefault}{\rmdefault}
+}
+
+
+\ExecuteOptions{roman}
+
+\ProcessOptions\relax 
+
+
+
+%% pagestyle setup
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\setlength{\headheight}{1.3in}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\voffset}{-1.0in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8.75in}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\setlength{\footskip}{-1.0in}
+
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+
+
+\makeatletter
+\pagestyle{fancy}
+\lhead{\@currentlabelname}
+\chead{}
+\rhead{\includegraphics[width=1cm]{iiitlogo.jpg}}
+\lfoot{Page \thepage}
+\cfoot{}
+
+\rfoot{\@author}
+
+
+\makeatother
+
+
+%% Theorem definitions
+
+\usepackage{amsthm, thmtools, xcolor, hyperref, xcolor}
+\usepackage[framemethod=TikZ]{mdframed}
+
+\definecolor{sapphireblue}{HTML}{2D368B}
+\definecolor{limegreen}{HTML}{74BD44}
+
+
+
+% theorem styles
+
+\declaretheoremstyle[
+  spaceabove=20pt,
+  spacebelow=20pt,
+  headfont=\sffamily\bfseries,
+  notefont=\sffamily\bfseries,
+  bodyfont=\normalfont,
+  postheadspace=1em
+]{defaultstyle}
+
+
+
+% mdframed boxed theoremstyles
+
+\global\mdfdefinestyle{theoremstyled}{
+  roundcorner=10pt,
+  nobreak=true,
+  linecolor=sapphireblue,linewidth=2pt,
+  frametitlerule=true,
+  frametitlebackgroundcolor=sapphireblue!20,
+  backgroundcolor=limegreen!20,
+  innertopmargin=\topskip
+}
+
+\global\mdfdefinestyle{bluebox}{
+  nobreak=true,
+  linecolor=black,
+  linewidth=4pt,
+  topline=false, bottomline=false,rightline=false,
+  backgroundcolor=sapphireblue!20,
+  innertopmargin=\topskip
+}
+
+\global\mdfdefinestyle{greenbox}{
+  nobreak=true,
+  linecolor=black,
+  linewidth=4pt,
+  topline=false, bottomline=false,rightline=false,
+  backgroundcolor=limegreen!20,
+  innertopmargin=\topskip
+}
+
+
+\makeatletter
+\define@key{thmdef}{mdthm}[{}]{%
+\thmt@trytwice{\def\thmt@theoremdefiner{\mdtheorem[#1]}}{}}
+\makeatother
+
+\declaretheorem[mdthm={style=theoremstyled},numberwithin=section]{theorem}
+\declaretheorem[mdthm={style=bluebox},numberwithin=section]{remark}
+\declaretheorem[mdthm={style=greenbox},numberwithin=section]{algorithm}
+\declaretheorem[mdthm={style=bluebox},numberwithin=section]{idea}
+\declaretheorem[mdthm={style=theoremstyled},numberwithin=section]{proposition}
+\declaretheorem[mdthm={style=theoremstyled },numberwithin=section]{lemma}
+
+
+
+\declaretheorem[style=defaultstyle,numberwithin=section]{definition}
+\declaretheorem[style=defaultstyle,numberwithin=section]{problem}
+\declaretheorem[style=defaultstyle,numbered=no]{question}
+\declaretheorem[style=defaultstyle,numbered=no]{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\endinput
